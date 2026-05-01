@@ -10,19 +10,8 @@
 
 ---
 
-## Results
 
-Episodic return on MuJoCo locomotion (evaluator, 20 episodes per checkpoint):
-
-| Environment | SDAC | FullBootFlow UCB | FullBootFlow TIDE | Command |
-|-------------|------|-----------------|------------------|---------|
-| Ant-v4 | 592 | **3703** (6.3x) | **4186** (7.1x) | `--env Ant-v4` |
-| Walker2d-v4 | 2899 | **4455** (1.5x) | **4555** (1.6x) | `--env Walker2d-v4` |
-| Humanoid-v4 | 5359 | **6493** (1.2x) | training | `--env Humanoid-v4 --total_step 5000000` |
-| Hopper-v4 | 3074 | **3513** (1.1x) | 3263 | `--env Hopper-v4` |
-| HalfCheetah-v4 | 11765 | ~12500 | 12186 | `--env HalfCheetah-v4` |
-
-Reproduce any row:
+Run any experiment:
 ```bash
 XLA_FLAGS='--xla_gpu_deterministic_ops=true' CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_CLIENT_MEM_FRACTION=.1 \
   python scripts/train_fullbootflow.py --num_heads 5 --exploration ucb --redq_m 2 <env flag> --seed 100
