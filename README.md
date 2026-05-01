@@ -8,6 +8,8 @@
 >
 > **[Report](link_coming_soon)** &nbsp;|&nbsp; **Built on [SDAC](https://arxiv.org/abs/2502.00361) (Ma et al., ICML 2025)**
 
+![BootFlow method overview](images/method.png)
+
 ---
 
 
