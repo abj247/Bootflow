@@ -1,0 +1,34 @@
+# Python
+*.py[cod]
+__pycache__/
+# /*.ipynb
+/*.pstats
+/*.pkl
+*.csv
+*.so
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+/logs/
+/output/
+
+*/.ipynb_checkpoints
+*.png
+# *.ipynb
+*.sh
+
+multirun/
+wandb/
+.DS_Store
+videos/
+proposal.tex
+nohup.out
+MUJOCO_LOG.TXT
+*.jpeg
+research-evaluations/
+paper/
+Screenshot*

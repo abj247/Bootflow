@@ -1,0 +1,22 @@
+# Core
+optax
+dm-haiku
+numpyro
+numba
+tensorboardX
+wandb
+pyyaml
+
+# Environment
+gymnasium[mujoco]==1.0.0
+dill==0.3.8
+
+# Visualization
+matplotlib
+scikit-learn
+imageio[ffmpeg]
+
+# Utility
+tqdm
+setproctitle
+ipdb
