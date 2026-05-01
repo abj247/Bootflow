@@ -80,7 +80,7 @@ pip install -r requirements.txt && pip install -e .
 ```
 </details>
 
-### Reproduce main result (Ant-v4, 7x over SDAC)
+### Reproduce main result
 
 ```bash
 # FullBootFlow UCB K=5 (Table 1, Row 1)
