@@ -6,7 +6,7 @@
 
 > We prove that naive ensemble exploration fails for generative RL policies due to a gradient alignment failure mode, and introduce BootFlow with independent Q-targets and TIDE exploration to resolve it. Up to 7x improvement on MuJoCo locomotion.
 >
-> **[Report](link_coming_soon)** &nbsp;|&nbsp; **Built on [SDAC](https://arxiv.org/abs/2502.00361) (Ma et al., ICML 2025)**
+> **[Report](https://drive.google.com/file/d/1VQIPrwMNuE8TFQq6mTTeI1EP9OQJCRyJ/view?usp=sharing)** &nbsp;|&nbsp; **Built on [SDAC](https://arxiv.org/abs/2502.00361) (Ma et al., ICML 2025)**
 
 ![BootFlow method overview](images/method.png)
 
