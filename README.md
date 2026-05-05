@@ -85,7 +85,7 @@ pip install -r requirements.txt && pip install -e .
 ### Reproduce main result
 
 ```bash
-# FullBootFlow UCB K=5 (Table 1, Row 1)
+# FullBootFlow UCB K=5 
 XLA_FLAGS='--xla_gpu_deterministic_ops=true' CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_CLIENT_MEM_FRACTION=.1 \
   python scripts/train_fullbootflow.py \
     --num_heads 5 --exploration ucb --ucb_beta 1.0 --redq_m 2 \
@@ -93,7 +93,7 @@ XLA_FLAGS='--xla_gpu_deterministic_ops=true' CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_C
 ```
 
 ```bash
-# FullBootFlow TIDE K=5 (Table 1, Row 1, TIDE variant)
+# FullBootFlow TIDE K=5 
 XLA_FLAGS='--xla_gpu_deterministic_ops=true' CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_CLIENT_MEM_FRACTION=.1 \
   python scripts/train_fullbootflow.py \
     --num_heads 5 --exploration idfm --idfm_beta 2.0 --idfm_mode corr --redq_m 2 \
