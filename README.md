@@ -8,7 +8,7 @@
 >
 > **[Report](https://drive.google.com/file/d/1VQIPrwMNuE8TFQq6mTTeI1EP9OQJCRyJ/view?usp=sharing)** &nbsp;|&nbsp; **Built on [SDAC](https://arxiv.org/abs/2502.00361) (Ma et al., ICML 2025)**
 
-![BootFlow method overview](images/method.png)
+![BootFlow method overview](images/method_1.png)
 
 ---
 
