@@ -1,1 +1,1 @@
-Metaworld Task implementations for SDAC and BootFlow
+Metaworld Task implementations
