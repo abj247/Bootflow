@@ -19,47 +19,6 @@ XLA_FLAGS='--xla_gpu_deterministic_ops=true' CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_C
   python scripts/train_fullbootflow.py --num_heads 5 --exploration ucb --redq_m 2 <env flag> --seed 100
 ```
 
----
-
-## Progress
-
-### Done
-- [x] Vanilla SDAC verified on HalfCheetah-v4 (12,528 return at 900K steps)
-- [x] Multi-head velocity network (shared backbone + K output heads)
-- [x] Thompson Sampling (per-episode head selection with trainer hooks)
-- [x] Bootstrap mask support (random on-the-fly + stored in buffer modes)
-- [x] Head disagreement metric logged during training
-- [x] Video recording script with tracking camera and checkerboard floor
-- [x] MetaWorld environment support (auto-detection, single-env fallback)
-- [x] Unified training script with progressive feature flags (K=1 = vanilla SDAC)
-- [x] K=1 BootFlow verified bit-identical to vanilla SDAC
-- [x] Randomized prior functions (Osband et al. 2018) for head diversity maintenance
-- [x] Disagreement exploration bonus (Pathak et al. 2019) as intrinsic reward
-- [x] Diversity loss (MED-RL, ICLR 2022) to prevent head collapse in policy loss
-- [x] Loss normalization fix (divide by K heads — critical for Ant-v4 and harder envs)
-- [x] Per-env Thompson sampling (each vectorized env tracks its own head)
-- [x] UCB exploration mode (`--exploration ucb`) — pool K×N candidates, select by Q + beta x disagreement
-- [x] Q-Weighted Head Voting pipeline (`scripts/train_qvoting.py`)
-- [x] AdaFlow implementation — K Q-ensemble critics with REDQ, Thompson on Q-networks, adaptive best-of-N
-- [x] FullBootFlow (K heads + K Q-networks) — 3.5x returns on Ant-v4 locomotion
-- [x] W&B project separation (`--wandb_project`, auto: `metaworld` for -v3 envs)
-- [x] W&B logging fix: separate step axes for sample/update/episode metrics
-- [x] Per-episode return logging (`episode/return` vs `episode/count`)
-- [x] `--updates_per_step` flag for data-starved single-env settings (MetaWorld)
-- [x] MetaWorld video recording script (`scripts/record_video_metaworld.py`)
-- [x] SDAC baseline on push-v3 (returns ~3087 at 1M steps)
-- [x] Flow matching policy (`--flow_matching`) as alternative to DDPM for all pipelines
-- [x] FullBootFlow Flow Matching UCB K=5: ~5x returns on Ant-v4 (best result)
-- [x] Improve BootFlow returns on MetaWorld (currently marginally better than vanilla SDAC)
-- [x] Test FullBootFlow K=5 with `--updates_per_step 5` on MetaWorld
-- [x] Log MetaWorld `success_rate` from `info["success"]`
-- [x] BootFlow UCB K=5 on MetaWorld manipulation tasks
-- [x] Test FullBootFlow K=2 UCB on MetaWorld (less data hunger)
-- [x] Test on harder MetaWorld tasks: peg-insert-side-v3, shelf-place-v3, sweep-into-v3
-- [x] Multi-seed runs on locomotion (Ant-v4, HalfCheetah-v4, Walker2d-v4) for paper
-- [x] Core assumption testing
-- [x] BootFlow ablations — vary K in {1,2,3,5,10}, bootstrap mask p in {0.0,0.6,1.0}
-- [x]  Evaluate FPO, QVPO, SAC as baseline                               
 
 
 ## Quick Start
