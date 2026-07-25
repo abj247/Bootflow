@@ -99,6 +99,8 @@ if __name__ == "__main__":
     parser.add_argument("--idfm_mode", type=str, default="raw",
                         choices=["raw", "qgate", "floor", "corr"],
                         help="IDFM calibration: raw=none, qgate=Q-std gating, floor=subtract noise floor, corr=correlation-based beta")
+    parser.add_argument("--idfm_num_levels", type=int, default=4, choices=[1, 2, 3, 4],
+                        help="Denoising-time probe points for TIDE disagreement: 4=[0,T/4,T/2,3T/4] (default), 1=[0] terminal-only ablation")
     parser.add_argument("--prior_scale", type=float, default=0.0,
                         help="Not used (independent backbones, no priors needed). Kept for CLI compatibility.")
     args = parser.parse_args()
@@ -154,6 +156,7 @@ if __name__ == "__main__":
         beta_schedule_scale=args.beta_schedule_scale,
         num_heads=args.num_heads,
         flow_matching=args.flow_matching,
+        idfm_num_levels=args.idfm_num_levels,
     )
 
     algorithm = FullBootflowSDAC(

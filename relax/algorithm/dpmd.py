@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 from typing import NamedTuple, Tuple
 
 import jax, jax.numpy as jnp
@@ -10,6 +12,7 @@ from relax.algorithm.base import Algorithm
 from relax.network.dacer import DACERNet, DACERParams
 from relax.network.diffv2 import Diffv2Net, Diffv2Params
 from relax.utils.experience import Experience
+from relax.utils.persistence import make_persist
 from relax.utils.typing_utils import Metric
 
 
@@ -219,7 +222,10 @@ class DPMD(Algorithm):
             }
             return state, info
 
-        self._implement_common_behavior(stateless_update, self.agent.get_action, self.agent.get_deterministic_action)
+        self._implement_common_behavior(stateless_update,
+                                        self.agent.get_action,
+                                        self.agent.get_deterministic_action,
+                                        stateless_get_value=self.agent.q)
 
     def get_policy_params(self):
         return (self.state.params.policy, self.state.params.log_alpha, self.state.params.q1, self.state.params.q2 )
@@ -227,10 +233,24 @@ class DPMD(Algorithm):
     def get_policy_params_to_save(self):
         return (self.state.params.target_poicy, self.state.params.log_alpha, self.state.params.q1, self.state.params.q2)
 
+    def get_value_params(self):
+        return self.state.params.q1, self.state.params.q2
+
     def save_policy(self, path: str) -> None:
         policy = jax.device_get(self.get_policy_params_to_save())
         with open(path, "wb") as f:
             pickle.dump(policy, f)
+
+    def save_q(self, path: str) -> None:
+        value = jax.device_get(self.get_value_params())
+        with open(path, "wb") as f:
+            pickle.dump(value, f)
+
+    def save_q_structure(self, root: os.PathLike, dummy_obs: jax.Array, dummy_action: jax.Array) -> None:
+        root = Path(root)
+        deterministic = make_persist(self._get_value._fun)(self.get_value_params()[0], dummy_obs, dummy_action)
+        deterministic.save(root / "q_func.pkl")
+        deterministic.save_info(root / "q_func.txt")
 
     def get_action(self, key: jax.Array, obs: np.ndarray) -> np.ndarray:
         action = self._get_action(key, self.get_policy_params_to_save(), obs)

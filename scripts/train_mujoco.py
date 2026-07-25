@@ -52,6 +52,9 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=100)
     parser.add_argument("--num_particles", type=int, default=32)
     parser.add_argument("--noise_scale", type=float, default=0.1)
+    parser.add_argument("--updates_per_step", type=int, default=1,
+                        help="Gradient updates per trainer iteration (1 iteration = num_vec_envs env steps). "
+                             "Default 1 reproduces all prior runs (UTD=1/num_vec_envs); 5 gives UTD=1.0 with 5 vec envs.")
     parser.add_argument("--cluster", default=False, action="store_true")
     parser.add_argument("--debug", action='store_true', default=False)
     parser.add_argument("--wandb_project", type=str, default="diffusion_online_rl",
@@ -178,6 +181,7 @@ if __name__ == "__main__":
         start_step=args.start_step,
         total_step=args.total_step,
         sample_per_iteration=1,
+        update_per_iteration=args.updates_per_step,
         evaluate_env=eval_env,
         save_policy_every=int(args.total_step / 20),
         warmup_with="random",

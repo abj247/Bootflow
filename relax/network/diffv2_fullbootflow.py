@@ -48,6 +48,9 @@ class FullBootflowNet:
     num_heads: int = 5
     beta_schedule_type: str = 'linear'
     flow_matching: bool = False
+    # Number of denoising-time probe points for the TIDE disagreement bonus:
+    # 4 -> [0, T/4, T/2, 3T/4] (paper default); 1 -> [0] (terminal-only ablation)
+    idfm_num_levels: int = 4
 
     @property
     def diffusion(self):
@@ -193,7 +196,7 @@ class FullBootflowNet:
 
         # Step 3: Integrated velocity disagreement across denoising timesteps
         T = self.num_timesteps
-        timestep_levels = [0, T // 4, T // 2, 3 * T // 4]
+        timestep_levels = [0, T // 4, T // 2, 3 * T // 4][: self.idfm_num_levels]
         total_disagree = jnp.zeros_like(q_mean)
 
         for t_level in timestep_levels:
@@ -376,6 +379,7 @@ def create_fullbootflow_net(
     beta_schedule_scale: float = 0.3,
     num_heads: int = 5,
     flow_matching: bool = False,
+    idfm_num_levels: int = 4,
 ) -> Tuple[FullBootflowNet, FullBootflowParams]:
 
     q = hk.without_apply_rng(hk.transform(
@@ -414,5 +418,6 @@ def create_fullbootflow_net(
         beta_schedule_scale=beta_schedule_scale,
         num_heads=num_heads,
         flow_matching=flow_matching,
+        idfm_num_levels=idfm_num_levels,
     )
     return net, params
